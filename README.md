@@ -4,6 +4,9 @@
 ### Brief Overview
 In recent memory, the federal debt has ballooned in size. It has become such an issue that House Rep. Thomas Massie of Kentucky wears a debt counter pin to represent its size - over USD$34 trillion. We provide an interactive chart displaying the debt level each year.
 
+### Run Instructions
+Run `python -m http.server 8080` to start the python server.
+
 All information comes from https://www.whitehouse.gov/omb/budget/historical-tables/ .
 
 # TODOs

@@ -1,43 +1,16 @@
-<!DOCTYPE html>
-<html>
-
+<!DOCTYPE HTML>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Lab 5 Brushing and Linking</title>
-    <link href="style.css" type="text/css" rel="stylesheet" />
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script type="text/javascript" src="main.js"></script>
+    <meta charset="UTF-8">
+    <title>Lab 3 - Scatterplot</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
-
 <body>
-    <h4>Lab 5 Brushing and Linking: Cereal Nutrition</h4>
-    <br />
-    <br />
-    <div id="wrapper">
-        <div id="chart1">
-        </div>
-        <div id="chart2">
-        </div>
-        <div id="chart3">
-            <div>
-                <strong>Low Calorie:</strong> <svg id="LowCalorie" width="20px" height="12px"></svg><br />
-                <strong>Medium Calorie:</strong> <svg id="MedCalorie" width="20px" height="12px"></svg><br />
-                <strong>High Calorie:</strong> <svg id="HighCalorie" width="20px" height="12px"></svg><br />
-            </div>
-            <p></p>
-            <br />
-            <div>
-                <strong>Cereal: </strong><p id="Cereal" style="display: inline;"></p><br />
-                <strong>Calories: </strong><p id="Calories" style="display: inline;"></p><br />
-                <strong>Fat Value: </strong><p id="FatValue" style="display: inline;"></p><br />
-            </div>
-            <br />
-            <div>
-                <strong>Carb Value: </strong><p id="CarbValue" style="display: inline;"></p><br />
-                <strong>Fiber Value: </strong><p id="FiberValue" style="display: inline;"></p><br />
-                <strong>Protein Value: </strong><p id="ProteinValue" style="display: inline;"></p><br />
-        </div>
+    <div id="main">
+        <svg width="720" height="400" style="border: 1px solid #777;">
+        </svg>
     </div>
 </body>
-
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="./scatterplot.js"></script>
 </html>

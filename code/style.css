@@ -1,56 +1,38 @@
 body {
-    font: 12px sans-serif;
+    font-family: "Open Sans";
 }
 
-#legend {
-    font: 12px sans-serif;
+#main {
+    margin: 10px 20px;
 }
 
-.tick>line {
-    fill: none;
-    stroke: black;
+text.label {
+    text-anchor: middle;
+    font-size: 11px;
+    fill: #555;
+    font-family: sans-serif;
 }
 
-.tick>text {
-    fill: black;
+.axis text {
+    fill: #555;
 }
 
-path.domain {
-    fill: none;
-    stroke-width: 2px;
-    stroke: black;
+.axis line,
+.axis path {
+    stroke: #555;
 }
 
-#wrapper {
-    clear: both;
+text.title {
+    text-anchor: middle;
+    font-size: 14px;
+    fill: #333;
 }
 
-#chart1 {
-    float: left;
+.standout {
+    fill: yellowgreen;
 }
 
-#chart2 {
-    float: left;
+.not-standout {
+    fill: steelblue;
 }
 
-#chart3 {
-    float: left;
-    margin-top: 30px;
-    margin-left: 20px;
-}
-
-.low {
-    fill: rgb(244, 79, 79);
-}
-
-.medium {
-    fill: rgb(242, 121, 80);
-}
-
-.high {
-    fill: rgb(243, 191, 79);
-}
-
-.non-brushed {
-    fill: grey;
-}
