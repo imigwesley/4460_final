@@ -2,19 +2,15 @@
 ## Wesley Imig, Alex Thorne
 
 ### Brief Overview
-In recent memory, the federal debt has ballooned in size. It has become such an issue that House Rep. Thomas Massie of Kentucky wears a debt counter pin to represent its size - over USD$34 trillion. We provide an interactive chart displaying the debt level each year.
+In recent memory, the federal debt has ballooned in size. It has become such an issue that House Rep. Thomas Massie of Kentucky wears a debt counter pin to represent its size - over USD$34 trillion. We provide an interactive chart displaying the debt level each year from 1940-2023.
 
 ### Run Instructions
 Run `python -m http.server 8080` to start the python server.
 
-All information comes from https://www.whitehouse.gov/omb/budget/historical-tables/ .
+All information comes from https://fiscaldata.treasury.gov/datasets/historical-debt-outstanding/historical-debt-outstanding.
 
 # TODOs
-- clean up code from lab 5 activity
-- import/select relevant rows from excel file
-- create chart axes and everything
-- put debt as line with dots
-- on hover over dots, show tooltip that says year and debt amount
 - provide way to change which years show (slider?? other ways??)
 - insert annotations for spikes (covid etc)
 - styling??
+- clean up chart
