@@ -8,22 +8,22 @@ d3.csv('federal_debt.csv').then(function(data) {
 
     // Convert attack, defense, and speed values to numbers
     data.forEach(d => {
-        d.debtAmount = +d.Attack;
-        d.defense = +d.Defense;
-        d.speed = +d.Speed;
+        d.debtAmount = +d["Debt Outstanding Amount"];
+        d.recordDate = d["Record Date"];
+        d.year = +d["Record Date"].slice(0, 4);
     });
     
 
     // **** Start of Code for creating scales for axes and data plotting****
 
     var yearScale = d3.scaleLinear()
-        // .domain(d3.extent(data, d => d.attack))        
-        // .range([60, 700]);
+        .domain(d3.extent(data, d => d.year))        
+        .range([60, 740]); // Adjust range to fit the SVG dimensions
 
-    // Scale for the speed attribute, mapping to a radius range
-    var speedScale = d3.scaleLinear()
-        .domain(d3.extent(data, d => d.speed))
-        .range([3, 10]);
+    var debtScale = d3.scaleLinear() // or make scaleLog to show more. probably will want to keep scaleLinear?
+        .domain(d3.extent(data, d => d.debtAmount))
+        .range([340, 20]); // Flip y-axis range for proper orientation
+
 
     var svg = d3.select('svg');
 
@@ -41,7 +41,7 @@ d3.csv('federal_debt.csv').then(function(data) {
         .style('opacity', 0); // Start with opacity 0 to keep it hidden
 
     // X-axis
-    var xAxis = d3.axisBottom(attackScale);
+    var xAxis = d3.axisBottom(yearScale);
     svg.append('g')
         .attr("transform", "translate(0,340)")
         .call(xAxis);
@@ -54,7 +54,7 @@ d3.csv('federal_debt.csv').then(function(data) {
 
 
     // Y-axis
-    var yAxis = d3.axisLeft(defenseScale);
+    var yAxis = d3.axisLeft(debtScale);
     svg.append("g")
         .attr("transform", "translate(60,0)")  // Move slightly right
         .call(yAxis);
@@ -72,20 +72,35 @@ d3.csv('federal_debt.csv').then(function(data) {
         .attr("x", 400)
         .attr("y", 20)
         .text("Federal debt over the yearzz");
-    
 
-    // Plot the points & scale radius by speed - Enter and append
+    // Line
+    var line = d3.line()
+    .x(d => yearScale(d.year))
+    .y(d => debtScale(d.debtAmount));
+
+    // Sort data by year
+    data.sort((a, b) => a.year - b.year);
+
+    // Append the line path
+    svg.append('path')
+        .datum(data)
+        .attr('d', line)
+        .attr('fill', 'none')
+        .attr('stroke', 'blue')
+        .attr('stroke-width', 2);
+        
+
+    // Change below code to plot dots for each data point and a line between them
 
     svg.selectAll('circle')
         .data(data)
         .enter()
         .append('circle')
-        .attr('cx', d => scaleAttack(d.attack))
-        .attr('cy', d => scaleDefense(d.defense))
-        .attr('r', d => scaleSpeed(d.speed))
-        .attr('class', d => d.speed > 100 ? 'standout' : 'not-standout')
+        .attr('cx', d => yearScale(d.year))
+        .attr('cy', d => debtScale(d.debtAmount))
+        .attr('r', 4)
+        .attr('fill', 'red')
         .style('opacity', '0.7')
-
         .on('mouseover', function(event, i) {
             const d = data[i]
             const cx = d3.event.pageX;
@@ -93,8 +108,8 @@ d3.csv('federal_debt.csv').then(function(data) {
             tooltip
                 .style('opacity', 1)
                 .html(`
-                    <strong>Year: ${d.Year}</strong><br>
-                    <strong>Debt: ${d.Debt}</strong>
+                    <strong>Year: ${d.year}</strong><br>
+                    <strong>Debt: ${d.debtAmount}</strong>
                 `)
                 .style('left', cx + 10 + 'px')
                 .style('top', cy + 'px')
