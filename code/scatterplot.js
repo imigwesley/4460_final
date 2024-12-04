@@ -2,42 +2,23 @@
 console.log('inside the js file')
 
 // Load the data
-d3.csv('PokemonExtended.csv').then(function(data) {
-    console.log(data)
-    console.log('here');
+d3.csv('federal_debt.csv').then(function(data) {
+    console.log('got data: ', data)
 
 
     // Convert attack, defense, and speed values to numbers
     data.forEach(d => {
-        d.attack = +d.Attack;
+        d.debtAmount = +d.Attack;
         d.defense = +d.Defense;
         d.speed = +d.Speed;
     });
-
-    // **** Functions to call for scaled values ****
-
-    function scaleAttack(attack) {
-        return attackScale(attack);
-    }
-
-    function scaleDefense(defense) {
-        return defenseScale(defense);
-    }
-
-    function scaleSpeed(speed) {
-        return speedScale(speed);
-    }
     
 
     // **** Start of Code for creating scales for axes and data plotting****
 
-    var attackScale = d3.scaleLinear()
-        .domain(d3.extent(data, d => d.attack))
-        .range([60, 700]);
-
-    var defenseScale = d3.scaleLinear()
-        .domain(d3.extent(data, d => d.defense))
-        .range([340, 20]);
+    var yearScale = d3.scaleLinear()
+        // .domain(d3.extent(data, d => d.attack))        
+        // .range([60, 700]);
 
     // Scale for the speed attribute, mapping to a radius range
     var speedScale = d3.scaleLinear()
@@ -59,7 +40,7 @@ d3.csv('PokemonExtended.csv').then(function(data) {
         .style('border-radius', '5px')
         .style('opacity', 0); // Start with opacity 0 to keep it hidden
 
-    // X-axis - Append to svg (axis and label)
+    // X-axis
     var xAxis = d3.axisBottom(attackScale);
     svg.append('g')
         .attr("transform", "translate(0,340)")
@@ -69,29 +50,28 @@ d3.csv('PokemonExtended.csv').then(function(data) {
         .attr("text-anchor", "middle")
         .attr("x", 400)
         .attr("y", 380)
-        .text("Attack");
+        .text("Year");
 
 
-    // Y-axis - Append to svg (axis and label)
-    var yAxis = d3.axisLeft(defenseScale);  // Y-axis based on defense values
+    // Y-axis
+    var yAxis = d3.axisLeft(defenseScale);
     svg.append("g")
         .attr("transform", "translate(60,0)")  // Move slightly right
         .call(yAxis);
 
-    // Y-axis label
     svg.append("text")
         .attr("text-anchor", "middle")
         .attr("x", -200)
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
-        .text("Defense");
+        .text("Debt????");
 
     // Title - Append to svg
     svg.append("text")
         .attr("text-anchor", "middle")
         .attr("x", 400)
         .attr("y", 20)
-        .text("Pokemon Attack vs. Defense");
+        .text("Federal debt over the yearzz");
     
 
     // Plot the points & scale radius by speed - Enter and append
@@ -113,9 +93,8 @@ d3.csv('PokemonExtended.csv').then(function(data) {
             tooltip
                 .style('opacity', 1)
                 .html(`
-                    <strong>Name: ${d.Name}</strong><br>
-                    Type 1: ${d['Type 1']}<br>
-                    ${d['Type 2'] ? `Type 2: ${d['Type 2']}` : ''}
+                    <strong>Year: ${d.Year}</strong><br>
+                    <strong>Debt: ${d.Debt}</strong>
                 `)
                 .style('left', cx + 10 + 'px')
                 .style('top', cy + 'px')
