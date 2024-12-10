@@ -1,7 +1,7 @@
 // **** Your JavaScript code goes here ****
 const annotations = [
     { year: 1861, debtAmount: 90580873.72, event: "Civil War", color: "gray" },
-    { year: 1929, debtAmount: 16931088484.10, event: "Great Depression", color: "blue" },
+    { year: 1914, debtAmount: 2912499269.16, event: "WWI", color: "blue" },
     { year: 1941, debtAmount: 48961443535.71, event: "WWII", color: "orange" },
     { year: 2008, debtAmount: 10024724896912.49, event: "Housing Crisis", color: "purple" },
     { year: 2020, debtAmount: 26945391194615.15, event: "COVID-19", color: "green" },
